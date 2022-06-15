@@ -6,6 +6,7 @@ const engine = require('ejs-mate')
 
 const Campground = require('./models/campground')
 const catchAsync = require('./utils/catchAsync')
+const ExpressError = require('./utils/ExpressError')
 const app = express()
 
 mongoose
@@ -86,8 +87,14 @@ app.delete(
 )
 
 // error handling
+app.all('*', (req, res, next) => {
+	next(new ExpressError('Page Not Found', 404))
+})
+
 app.use((err, req, res, next) => {
-	res.send('Something went wrong!')
+	const { statusCode = 500 } = err
+	if (!err.message) err.message = 'Something went wrong.'
+	res.status(statusCode).render('error', { err })
 })
 
 app.listen(3000, () => {
