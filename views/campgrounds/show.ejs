@@ -11,20 +11,18 @@
 					<%= campground.location %>
 				</h5>
 				<p class="card-text"><%= campground.description %></p>
-				<div class="card-body">
-					<a
-						href="/campgrounds/<%= campground._id%>/edit"
-						class="card-link btn btn-info"
-						>Edit</a
-					>
-					<form
-						action="/campgrounds/<%= campground._id %>?_method=delete"
-						method="POST"
-						class="d-inline"
-					>
-						<button class="btn btn-danger card-link">Delete</button>
-					</form>
-				</div>
+				<a
+					href="/campgrounds/<%= campground._id%>/edit"
+					class="card-link btn btn-info"
+					>Edit</a
+				>
+				<form
+					action="/campgrounds/<%= campground._id %>?_method=delete"
+					method="POST"
+					class="d-inline"
+				>
+					<button class="btn btn-danger card-link">Delete</button>
+				</form>
 			</div>
 		</div>
 	</div>
