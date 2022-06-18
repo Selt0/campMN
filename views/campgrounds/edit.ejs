@@ -47,7 +47,11 @@
 			</div>
 			<div class="mb-3">
 				<% campground.images.forEach((image, ind) => { %>
-				<img src="<%=image.url%>" alt="picture of camp" class="img-thumbnail" />
+				<img
+					src="<%=image.thumbnail%>"
+					alt="picture of camp"
+					class="img-thumbnail"
+				/>
 				<div class="form-check form-check-inline">
 					<input
 						class="form-check-input"
