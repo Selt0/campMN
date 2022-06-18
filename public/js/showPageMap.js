@@ -1,5 +1,5 @@
-mapboxgl.accessToken =
-	'pk.eyJ1IjoibW9jb21vY2hpIiwiYSI6ImNsNGs1NHU2bzBxMmgzaXJ3c25rMDgyd3kifQ.9S5mJRWgN8GpboW0S_9zCw'
+mapboxgl.accessToken = mapToken
+
 const map = new mapboxgl.Map({
 	container: 'map',
 	style: 'mapbox://styles/mapbox/outdoors-v11',
