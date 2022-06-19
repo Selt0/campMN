@@ -1,30 +1,52 @@
 <% layout('layouts/boilerplate.ejs') %>
-
-<h1>Register</h1>
-<form action="/register" class="needs-validation" novalidate method="post">
-	<div class="mb-3">
-		<label for="username" class="form-label">Username</label>
-		<input
-			type="text"
-			class="form-control"
-			id="username"
-			name="username"
-			required
-		/>
+<div class="container d-flex justify-content-center align-items-center mt-md-5">
+	<div class="card shadow mb-3" style="max-width: 600px">
+		<div class="row g-0">
+			<div class="col-md-5">
+				<img
+					src="https://images.unsplash.com/photo-1655568411540-f4b29d0a982e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw2N3x8fGVufDB8fHx8&auto=format&fit=crop&w=900&q=60"
+					class="img-fluid rounded-start"
+					alt="trees"
+				/>
+			</div>
+			<div class="col-md-7">
+				<div class="card-body">
+					<h5 class="card-title">Register</h5>
+					<form
+						action="/login"
+						class="needs-validation"
+						novalidate
+						method="post"
+					>
+						<div class="mb-3">
+							<label for="username" class="form-label card-text"
+								>Username</label
+							>
+							<input
+								type="text"
+								class="form-control"
+								id="username"
+								name="username"
+								required
+								autofocus
+							/>
+						</div>
+						<div class="mb-3">
+							<label for="password" class="form-label card-text"
+								>Password</label
+							>
+							<input
+								type="password"
+								class="form-control"
+								id="password"
+								name="password"
+								required
+							/>
+						</div>
+						<button class="btn btn-success">Register</button>
+					</form>
+				</div>
+			</div>
+		</div>
 	</div>
-	<div class="mb-3">
-		<label for="email" class="form-label">Email</label>
-		<input type="email" class="form-control" id="email" name="email" required />
-	</div>
-	<div class="mb-3">
-		<label for="password" class="form-label">Password</label>
-		<input
-			type="password"
-			class="form-control"
-			id="password"
-			name="password"
-			required
-		/>
-	</div>
-	<button class="btn btn-success">Register</button>
-</form>
+</div>
