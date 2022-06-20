@@ -16,7 +16,7 @@ Users should be able to:
 - Login
 - Explore the map
 
-**### Screenshot**
+### Screenshot
 
 ![](./Screen%20Shot%202022-06-20%20at%2012.55.50%20PM.png)
 
@@ -24,13 +24,13 @@ https://user-images.githubusercontent.com/23282172/174658287-ba8786ba-df1c-4193-
 
 
 
-**### Links**
+### Links
 
 - Live Site URL: [https://campmn.herokuapp.com/](https://campmn.herokuapp.com/)
 
-**## My process**
+## My process
 
-**### Built with**
+### Built with
 
 - Semantic HTML5 markup
 - CSS custom properties
@@ -43,7 +43,7 @@ https://user-images.githubusercontent.com/23282172/174658287-ba8786ba-df1c-4193-
 - [MongoDB](https://www.mongodb.com/) - database
 - [Express](https://expressjs.com/)
 
-**### What I learned**
+### What I learned
 
 This was a big project for me to complete. I learned about new packages including flash, helmet, and joi, to name a few. I followed the RESTful routing guidelines and used <code>router.route</code> to clean up my routes. I created a boilerplate and partials and used EJS to include them. This project was mostly about learning middleware and using the various libraries to put together the pieces I needed to complete this project.
 
@@ -137,16 +137,16 @@ module.exports.showCampground = async (req, res) => {
 }
 ```
 
-**### Continued development**
+### Continued development
 
 There is always more features to add and a few things to improve on. As I was creating the campgrounds, I realized I need a better way to add description to a campground instead of creating a big box of text.
 I also want to add a way to search or even filter campgrounds based on location or activities. I want to shorten the amount of information on the cards displayed on the show page and add the number of reviews and perhaps even an avg rating based on the stars added.
 
-**### Useful resources**
+### Useful resources
 
 Docs and Google
 
-**## Author**
+## Author
 
 - Website - [Michael Martinez](https://michael-martinez.netlify.app/)
 - Twitter - [@MMocomochi](https://twitter.com/MMocomochi)
