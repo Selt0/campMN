@@ -53,6 +53,7 @@ store.on('error', e => {
 app.use(
 	session({
 		store,
+		name: 'session',
 		secret,
 		resave: false,
 		saveUninitialized: true,
