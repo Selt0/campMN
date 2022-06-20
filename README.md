@@ -18,7 +18,7 @@ Users should be able to:
 
 **### Screenshot**
 
-![](./Camp.mp4)
+![](./Screen%20Shot%202022-06-20%20at%2012.55.50%20PM.png)
 
 **### Links**
 
@@ -41,49 +41,108 @@ Users should be able to:
 
 **### What I learned**
 
-Use this section to recap over some of your major learnings while working through this project. Writing these out and providing code samples of areas you want to highlight is a great way to reinforce your own knowledge.
+This was a big project for me to complete. I learned about new packages including flash, helmet, and joi, to name a few. I followed the RESTful routing guidelines and used <code>router.route</code> to clean up my routes. I created a boilerplate and partials and used EJS to include them. This project was mostly about learning middleware and using the various libraries to put together the pieces I needed to complete this project.
 
-To see how you can add code snippets, see below:
+In the beginning, as I was building the project, I created a seeds file to create campgounds to fill the database. I created a list of cities and campground names that would be randomly selected to create a campground. Once the site was live, I created some campgrounds that are located in MN.
+
+As I continued building and adding features, I had to constantly update my models to include the new information I was adding. I learned about using mongoose virtual properties to create temporary properties to be used with MapBox and create attributes to be used in the DOM.
+
+I also learned about mongoose <code> populate </code> to grab additional data that was stored in the database and be able to display them.
 
 ```html
-<h1>Some HTML code I'm proud of</h1>
-```
-
-```css
-.proud-of-this-css {
-	color: papayawhip;
-}
+<% layout('layouts/boilerplate.ejs') %> <%- include('../partials/navbar') %>
 ```
 
 ```js
-const proudOfThisFunc = () => {
-	console.log('🎉')
+router
+	.route('/:id')
+	.get(catchAsync(campgrounds.showCampground))
+	.put(
+		isLoggedIn,
+		isAuthor,
+		upload.array('campground[images]'),
+		validateCampground,
+		catchAsync(campgrounds.editCampground)
+	)
+	.delete(isLoggedIn, isAuthor, catchAsync(campgrounds.deleteCampground))
+
+const ImageSchema = new Schema({
+	url: String,
+	filename: String
+})
+
+ImageSchema.virtual('thumbnail').get(function () {
+	return this.url.replace('/upload', '/upload/w_200')
+})
+
+const CampgroundSchema = new Schema(
+	{
+		title: String,
+		images: [ImageSchema],
+		geometry: {
+			type: {
+				type: String,
+				enum: ['Point'],
+				required: true
+			},
+			coordinates: {
+				type: [Number],
+				required: true
+			}
+		},
+		price: Number,
+		description: String,
+		location: String,
+		author: {
+			type: Schema.Types.ObjectId,
+			ref: 'User'
+		},
+		reviews: [
+			{
+				type: Schema.Types.ObjectId,
+				ref: 'Review'
+			}
+		]
+	},
+	{ toJSON: { virtuals: true } }
+)
+
+CampgroundSchema.virtual('properties.popupMarkup').get(function () {
+	return `<strong><a href="/campgrounds/${
+		this._id
+	}">${this.title}</a><strong><br/><p>${this.description.substring(0, 25)}...</p>`
+})
+
+module.exports.showCampground = async (req, res) => {
+	const { id } = req.params
+	const campground = await Campground.findById(id)
+		.populate({
+			path: 'reviews',
+			populate: {
+				path: 'author'
+			}
+		})
+		.populate('author')
+
+	if (!campground) {
+		req.flash('error', 'Campground not found!')
+		return res.redirect('/campgrounds')
+	}
+
+	res.render('campgrounds/show', { campground })
 }
 ```
 
-If you want more help with writing markdown, we'd recommend checking out [The Markdown Guide](https://www.markdownguide.org/) to learn more.
-
-- **_Note: Delete this note and the content within this section and replace with your own learnings._**
-
 **### Continued development**
 
-Use this section to outline areas that you want to continue focusing on in future projects. These could be concepts you're still not completely comfortable with or techniques you found useful that you want to refine and perfect.
-
-- **_Note: Delete this note and the content within this section and replace with your own plans for continued development._**
+There is always more features to add and a few things to improve on. As I was creating the campgrounds, I realized I need a better way to add description to a campground instead of creating a big box of text.
+I also want to add a way to search or even filter campgrounds based on location or activities. I want to shorten the amount of information on the cards displayed on the show page and add the number of reviews and perhaps even an avg rating based on the stars added.
 
 **### Useful resources**
 
-- [Example resource 1](https://www.example.com) - This helped me for XYZ reason. I really liked this pattern and will use it going forward.
-- [Example resource 2](https://www.example.com) - This is an amazing article which helped me finally understand XYZ. I'd recommend it to anyone still learning this concept.
-- **_Note: Delete this note and replace the list above with resources that helped you during the challenge. These could come in handy for anyone viewing your solution or for yourself when you look back on this project in the future._**
+Docs and Google
 
 **## Author**
 
 - Website - [Michael Martinez](https://michael-martinez.netlify.app/)
 - Twitter - [@MMocomochi](https://twitter.com/MMocomochi)
-
-**## Acknowledgments**
-
-This is where you can give a hat tip to anyone who helped you out on this project. Perhaps you worked in a team or got some inspiration from someone else's solution. This is the perfect place to give them some credit.
-
-- **_Note: Delete this note and edit this section's content as necessary. If you completed this challenge by yourself, feel free to delete this section entirely._**
