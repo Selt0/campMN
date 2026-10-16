@@ -26,7 +26,8 @@ https://user-images.githubusercontent.com/23282172/174658287-ba8786ba-df1c-4193-
 
 ### Links
 
-- Live Site URL: [https://campmn.herokuapp.com/](https://campmn.herokuapp.com/)
+- ~~Live Site URL: [https://campmn.herokuapp.com/](https://campmn.herokuapp.com/)~~
+Live demo offline (Heroku free tier ended); see the video above.
 
 ## My process
 
